@@ -4,7 +4,8 @@ react-render-self
 [![npm version][npm-image]][npm-url] [![license][license-image]][license-url] [![downloads][downloads-image]][downloads-url]
 
 Allows children components update state of parent by ref.
-Or you can set property **empty** to hide children and/or render component for empty state.
+Set property **empty** to hide children and/or render something for empty state.
+Or you can set **delay** in msec to render component after delay and/or render something while it wait.
 
 Install with [npm](https://www.npmjs.com/):
 
@@ -25,7 +26,7 @@ class Main extends React.Component {
         return (
             <>
                 <RenderSelf>
-                    {'CHILDREN ARE RENDERED'}
+                    {'CHILDREN RENDERED'}
                 </RenderSelf>
                 <br />
                 <RenderSelf empty>
@@ -41,7 +42,7 @@ class Main extends React.Component {
                 </RenderSelf>
                 <br />
                 <RenderSelf onRenderContent={self => <>{'CUSTOM CONTENT + '}{self.props.children}</>}>
-                    {'CHILDREN ARE RENDERED'}
+                    {'CHILDREN RENDERED'}
                 </RenderSelf>
                 <br />
                 <RenderSelf onRenderContent={self => (
@@ -49,6 +50,20 @@ class Main extends React.Component {
                         {`CLICK WILL UPDATE ONLY THIS COMPONENT (counter = ${counter})`}
                     </div>
                 )} />
+                <RenderSelf delay={3000}>
+                    {'CHILDREN RENDERED'}
+                </RenderSelf>
+                <RenderSelf delay={3000} onRenderDelay={() => 'PLEASE WAIT...'}>
+                    {'CHILDREN RENDERED'}
+                </RenderSelf>
+                <RenderSelf
+                    delay={3000}
+                    empty
+                    onRenderDelay={() => 'FIRST. PLEASE WAIT...'}
+                    onRenderEmpty={'SECOND. EMPTY RENDERED'}
+                >
+                    {'CHILDREN WILL NOT RENDERED'}
+                </RenderSelf>
             </>
         );
     }
