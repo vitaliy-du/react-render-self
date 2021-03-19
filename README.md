@@ -22,7 +22,7 @@ import {ReactRenderSelf as RenderSelf} from "react-render-self";
 
 class Main extends React.Component {
     render(): React.ReactNode {
-        const counter = 1;
+        let counter = 1;
         return (
             <>
                 <RenderSelf>
@@ -50,12 +50,15 @@ class Main extends React.Component {
                         {`CLICK WILL UPDATE ONLY THIS COMPONENT (counter = ${counter})`}
                     </div>
                 )} />
+                <br />
                 <RenderSelf delay={3000}>
-                    {'CHILDREN RENDERED'}
+                    {'CHILDREN RENDERED AFTER 3 sec'}
                 </RenderSelf>
+                <br />
                 <RenderSelf delay={3000} onRenderDelay={() => 'PLEASE WAIT...'}>
                     {'CHILDREN RENDERED'}
                 </RenderSelf>
+                <br />
                 <RenderSelf
                     delay={3000}
                     empty
